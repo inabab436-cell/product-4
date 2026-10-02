@@ -276,7 +276,7 @@ function OrdersPage() {
         </p>
       </HubCard>
 
-      <div id="messages" className="scroll-mt-20"><StatusMessagesEditor /></div>
+
     </HubShell>
   );
 }
@@ -512,7 +512,7 @@ function InfoRow({ icon, label, children }: { icon: React.ReactNode; label: stri
   );
 }
 
-function StatusMessagesEditor() {
+export function StatusMessagesEditor() {
   const qc = useQueryClient();
   const q = useQuery({ queryKey: ["order-status-messages"], queryFn: () => getOrderStatusMessages() });
   const [prepared, setPrepared] = useState("");

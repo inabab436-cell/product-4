@@ -17,6 +17,7 @@ import { Route as EarningsRouteImport } from './routes/earnings'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OffersRouteImport } from './routes/offers'
+import { Route as OrderMessagesRouteImport } from './routes/order-messages'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PublishedRouteImport } from './routes/published'
@@ -73,6 +74,11 @@ const LoginRoute = LoginRouteImport.update({
 const OffersRoute = OffersRouteImport.update({
   id: '/offers',
   path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderMessagesRoute = OrderMessagesRouteImport.update({
+  id: '/order-messages',
+  path: '/order-messages',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/login': typeof LoginRoute
   '/offers': typeof OffersRoute
+  '/order-messages': typeof OrderMessagesRoute
   '/orders': typeof OrdersRoute
   '/products': typeof ProductsRoute
   '/published': typeof PublishedRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/login': typeof LoginRoute
   '/offers': typeof OffersRoute
+  '/order-messages': typeof OrderMessagesRoute
   '/orders': typeof OrdersRoute
   '/products': typeof ProductsRoute
   '/published': typeof PublishedRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/login': typeof LoginRoute
   '/offers': typeof OffersRoute
+  '/order-messages': typeof OrderMessagesRoute
   '/orders': typeof OrdersRoute
   '/products': typeof ProductsRoute
   '/published': typeof PublishedRoute
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/login'
     | '/offers'
+    | '/order-messages'
     | '/orders'
     | '/products'
     | '/published'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/login'
     | '/offers'
+    | '/order-messages'
     | '/orders'
     | '/products'
     | '/published'
@@ -306,6 +317,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/login'
     | '/offers'
+    | '/order-messages'
     | '/orders'
     | '/products'
     | '/published'
@@ -334,6 +346,7 @@ export interface RootRouteChildren {
   JoinRoute: typeof JoinRoute
   LoginRoute: typeof LoginRoute
   OffersRoute: typeof OffersRoute
+  OrderMessagesRoute: typeof OrderMessagesRoute
   OrdersRoute: typeof OrdersRoute
   ProductsRoute: typeof ProductsRoute
   PublishedRoute: typeof PublishedRoute
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       path: '/offers'
       fullPath: '/offers'
       preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-messages': {
+      id: '/order-messages'
+      path: '/order-messages'
+      fullPath: '/order-messages'
+      preLoaderRoute: typeof OrderMessagesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -562,6 +582,7 @@ const rootRouteChildren: RootRouteChildren = {
   JoinRoute: JoinRoute,
   LoginRoute: LoginRoute,
   OffersRoute: OffersRoute,
+  OrderMessagesRoute: OrderMessagesRoute,
   OrdersRoute: OrdersRoute,
   ProductsRoute: ProductsRoute,
   PublishedRoute: PublishedRoute,
