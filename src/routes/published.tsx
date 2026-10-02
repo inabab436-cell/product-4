@@ -160,19 +160,10 @@ function ManagementBoard({ state }: { state: SiteState }) {
               </div>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-2">
-              {state.site_status !== "published" ? (
-                <Button onClick={() => publishMut.mutate()} disabled={publishMut.isPending} className="bg-gradient-brand text-primary-foreground shadow-glow">
-                  <Globe className="mr-2 h-4 w-4" />Publish
-                </Button>
-              ) : (
-                <Button variant="outline" onClick={() => unpublishMut.mutate()} disabled={unpublishMut.isPending}>
-                  Unpublish
-                </Button>
-              )}
             </div>
           </div>
 
-          {state.site_status === "published" && publicUrl && (
+          {publicUrl && (
             <div className="mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-border/60 bg-muted/30 p-3">
               <code className="min-w-0 flex-1 truncate text-sm">{publicUrl}</code>
               <Button size="sm" variant="secondary" onClick={() => {
@@ -291,11 +282,6 @@ function ProductsSection() {
                   </div>
                 </div>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <Button size="sm" variant={p.is_published ? "secondary" : "default"}
-                    className={p.is_published ? "" : "bg-gradient-brand text-primary-foreground shadow-glow"}
-                    onClick={() => pubMut.mutate({ id: p.id, is_published: !p.is_published })}>
-                    {p.is_published ? "Unpublish" : "Publish"}
-                  </Button>
                   <Button size="sm" variant="outline" onClick={() => setEditing(p)}>
                     <Pencil className="h-3.5 w-3.5" />
                   </Button>
@@ -318,7 +304,6 @@ function ProductsSection() {
                 <th className="px-4 py-2">Price</th>
                 <th className="px-4 py-2">Sizes</th>
                 <th className="px-4 py-2">Colors</th>
-                <th className="px-4 py-2">Published</th>
                 <th className="px-4 py-2 text-right">Actions</th>
               </tr>
             </thead>
@@ -349,11 +334,6 @@ function ProductsSection() {
                     </td>
                     <td className="px-4 py-3 text-xs text-muted-foreground">
                       {p.colors.length > 0 ? p.colors.map((c) => c.label).join(", ") : "—"}
-                    </td>
-                    <td className="px-4 py-3">
-                      <Button size="sm" variant={p.is_published ? "secondary" : "default"} className={p.is_published ? "" : "bg-gradient-brand text-primary-foreground shadow-glow"} onClick={() => pubMut.mutate({ id: p.id, is_published: !p.is_published })}>
-                        {p.is_published ? "Unpublish" : "Publish"}
-                      </Button>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex justify-end gap-1">
