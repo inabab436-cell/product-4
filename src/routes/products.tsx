@@ -220,7 +220,6 @@ function ProductsPage() {
                     <th className="px-4 py-3">المتبقي</th>
                     <th className="px-4 py-3">الألوان / المقاسات</th>
                     <th className="px-4 py-3">أضيف في</th>
-                    <th className="px-4 py-3">النشر</th>
                     <th className="px-4 py-3">إجراءات</th>
                   </tr>
                 </thead>
@@ -361,16 +360,6 @@ function ProductsPage() {
                           </td>
                           <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground">
                             {new Date(p.created_at).toLocaleDateString("ar-EG")}
-                          </td>
-                          <td className="px-4 py-3">
-                            <Button
-                              size="sm"
-                              variant={p.is_published ? "secondary" : "default"}
-                              className={p.is_published ? "" : "bg-gradient-brand text-primary-foreground shadow-glow"}
-                              onClick={() => pubMut.mutate({ id: p.id, is_published: !p.is_published })}
-                            >
-                              {p.is_published ? "إلغاء النشر" : "نشر"}
-                            </Button>
                           </td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-1">

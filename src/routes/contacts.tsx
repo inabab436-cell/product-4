@@ -130,14 +130,6 @@ function ContactsPage() {
                       </div>
                       <div className="flex gap-1">
                         <Button size="sm" variant="outline" onClick={() => setEditing((p) => ({ ...p, [c.id]: { ...c } }))}>تعديل</Button>
-                        <Button
-                          size="sm"
-                          variant={(c as any).is_published ? "secondary" : "default"}
-                          onClick={() => pubMut.mutate({ id: c.id, is_published: !(c as any).is_published })}
-                          className={(c as any).is_published ? "" : "bg-gradient-brand text-primary-foreground shadow-glow hover:opacity-95"}
-                        >
-                          {(c as any).is_published ? "إلغاء النشر" : "نشر"}
-                        </Button>
                         <Button size="sm" variant="ghost" onClick={() => { if (confirm("حذف؟")) delMut.mutate(c.id); }}>
                           <Trash2 className="h-3.5 w-3.5" />
                         </Button>

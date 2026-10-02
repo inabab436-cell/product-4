@@ -102,7 +102,6 @@ function ShippingPage() {
                   <th className="px-4 py-3">السعر</th>
                   <th className="px-4 py-3">المدة</th>
                   <th className="px-4 py-3">ملاحظات</th>
-                  <th className="px-4 py-3">النشر</th>
                   <th className="px-4 py-3 text-left">الإجراءات</th>
                 </tr>
               </thead>
@@ -128,16 +127,6 @@ function ShippingPage() {
                         <td className="px-4 py-3">{r.eta ?? "—"}</td>
                         <td className="px-4 py-3 text-xs text-muted-foreground">
                           <div className="line-clamp-1 max-w-[220px]">{r.notes ?? ""}</div>
-                        </td>
-                        <td className="px-4 py-3">
-                          <Button
-                            size="sm"
-                            variant={r.is_published ? "secondary" : "default"}
-                            className={r.is_published ? "" : "bg-gradient-brand text-primary-foreground shadow-glow"}
-                            onClick={() => pubMut.mutate({ id: r.id, is_published: !r.is_published })}
-                          >
-                            {r.is_published ? "إلغاء النشر" : "نشر"}
-                          </Button>
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex justify-end gap-1">

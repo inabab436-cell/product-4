@@ -131,6 +131,7 @@ function OrdersPage() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<"all" | "new" | "prepared" | "shipped" | "delivered" | "cancelled">("all");
   const [search, setSearch] = useState("");
+  const [tab, setTab] = useState<"orders" | "messages">("orders");
 
   const statusMut = useMutation({
     mutationFn: (v: { id: string; status: "prepared" | "shipped" | "delivered" }) =>
@@ -215,6 +216,24 @@ function OrdersPage() {
       title={<>كل الطلبات</>}
       subtitle="افتح أي طلب لعرض تفاصيله، وحدّث حالته ليصل إشعار للعميل تلقائياً."
     >
+      <div className="grid grid-cols-2 gap-1 rounded-full border border-border bg-muted p-1">
+        {([
+          { key: "orders", label: "الطلبات" },
+          { key: "messages", label: "رسائل الطلبات" },
+        ] as const).map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`rounded-full py-2 text-sm font-semibold transition-colors ${
+              tab === t.key ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "messages" ? <StatusMessagesEditor /> : <>
       {/* Search + filters */}
       <div className="space-y-3">
         <div className="relative">
@@ -275,8 +294,7 @@ function OrdersPage() {
           لو حابب ترجّع الكميات للمخزون مرة أخرى، اضغط زر <span className="font-semibold text-foreground">«ملغي»</span> بجانب الطلب.
         </p>
       </HubCard>
-
-
+      </>}
     </HubShell>
   );
 }
@@ -512,7 +530,7 @@ function InfoRow({ icon, label, children }: { icon: React.ReactNode; label: stri
   );
 }
 
-export function StatusMessagesEditor() {
+function StatusMessagesEditor() {
   const qc = useQueryClient();
   const q = useQuery({ queryKey: ["order-status-messages"], queryFn: () => getOrderStatusMessages() });
   const [prepared, setPrepared] = useState("");

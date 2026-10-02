@@ -40,7 +40,7 @@ async function loadState(userId: string): Promise<SiteState> {
     .maybeSingle();
   if (!data) {
     return {
-      site_created: false, site_status: "draft",
+      site_created: false, site_status: "published",
       brand_name: null, brand_slug: null,
       description: null, logo_url: null, theme_key: null,
       public_url: null,
@@ -100,7 +100,7 @@ export const createWebsite = createServerFn({ method: "POST" })
           brand_name: data.brand_name,
           brand_slug: slug,
           site_created: true,
-          site_status: "draft",
+          site_status: "published",
           updated_at: new Date().toISOString(),
         },
         { onConflict: "user_id" },
@@ -209,7 +209,7 @@ export const updateWebsiteIdentity = createServerFn({ method: "POST" })
         logo_url: patch.logo_url ?? null,
         theme_key: patch.theme_key ?? null,
         site_created: true,
-        site_status: "draft",
+        site_status: "published",
       });
       if (error) throw new Error(error.message);
     }

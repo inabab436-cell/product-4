@@ -326,7 +326,7 @@ export const upsertWebsiteProduct = createServerFn({ method: "POST" })
         user_id: userId,
         name: data.name, description: data.description,
         price: data.price, currency: data.currency,
-        is_published: false,
+        is_published: true,
       };
       let res = await admin.from("products").insert(withMaterial(base) as any).select("id").single();
       if (res.error && /material/i.test(res.error.message)) {
