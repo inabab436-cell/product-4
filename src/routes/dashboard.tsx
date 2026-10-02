@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Package, Truck, PhoneCall, Globe, ArrowLeft, Bell, CreditCard,
   AlertTriangle, ShoppingBag, Check, HelpCircle, Clock4, BadgePercent,
-  ChevronDown, LifeBuoy, MailCheck, TrendingUp, Users, LayoutGrid, MessageSquareText,
+  ChevronDown, LifeBuoy, MailCheck, TrendingUp, Users, LayoutGrid,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -48,7 +48,6 @@ type Tile = {
 
 const TILES: Tile[] = [
   { to: "/orders", label: "الطلبات", description: "متابعة وتجهيز", icon: <ShoppingBag className="h-5 w-5" />, tone: "bg-dashboard-blue-soft text-dashboard-blue", perm: "orders" },
-  { to: "/order-messages", label: "رسائل الطلبات", description: "الرسائل التلقائية", icon: <MessageSquareText className="h-5 w-5" />, tone: "bg-dashboard-amber-soft text-dashboard-amber", perm: "orders" },
   { to: "/products", label: "المخزون", description: "المنتجات والكميات", icon: <Package className="h-5 w-5" />, tone: "bg-dashboard-green-soft text-dashboard-green", perm: "brand_data" },
   { to: "/published", label: "الموقع", description: "واجهة متجرك", icon: <Globe className="h-5 w-5" />, tone: "bg-dashboard-blue-soft text-dashboard-blue", perm: "settings" },
   { to: "/offers", label: "العروض", description: "الخصومات الحالية", icon: <BadgePercent className="h-5 w-5" />, tone: "bg-dashboard-amber-soft text-dashboard-amber", perm: "brand_data" },

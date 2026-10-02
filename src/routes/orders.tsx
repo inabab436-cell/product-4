@@ -512,7 +512,7 @@ function InfoRow({ icon, label, children }: { icon: React.ReactNode; label: stri
   );
 }
 
-export function StatusMessagesEditor() {
+function StatusMessagesEditor() {
   const qc = useQueryClient();
   const q = useQuery({ queryKey: ["order-status-messages"], queryFn: () => getOrderStatusMessages() });
   const [prepared, setPrepared] = useState("");
