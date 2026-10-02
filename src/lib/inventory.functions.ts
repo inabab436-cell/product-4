@@ -141,7 +141,7 @@ export const createManualProduct = createServerFn({ method: "POST" })
       currency,
       variants,
       images: [],
-      is_published: false,
+      is_published: true,
     };
     // `material` may not be migrated yet on older databases — retry without it.
     let ins = await admin

@@ -67,7 +67,7 @@ export const getStorefront = createServerFn({ method: "GET" })
     const { data: merchant } = await admin.from("merchants")
       .select("id, user_id, brand_slug, brand_name, description, logo_url, theme_key, site_status, sections_config")
       .eq("brand_slug", data.slug).maybeSingle();
-    if (!merchant?.id || (merchant as any).site_status === "unpublished") {
+    if (!merchant?.id || false) {
       return {
         found: false, slug: data.slug, userId: null, merchantId: null, brandName: null,
         brandDescription: null, logoUrl: null, themeKey: null,
@@ -85,16 +85,16 @@ export const getStorefront = createServerFn({ method: "GET" })
     const [pR, polR, cR, shR, imgR] = await Promise.all([
       admin.from("products")
         .select("id,name,description,category,price,currency,images,variants")
-        .eq("user_id", userId).eq("is_published", true).order("category").order("name"),
+        .eq("user_id", userId).order("category").order("name"),
       admin.from("policies")
         .select("id,kind,title,content")
-        .eq("user_id", userId).eq("is_published", true).order("kind"),
+        .eq("user_id", userId).order("kind"),
       admin.from("contact_info")
         .select("id,kind,label,value")
-        .eq("user_id", userId).eq("is_published", true).order("kind"),
+        .eq("user_id", userId).order("kind"),
       admin.from("shipping_rates")
         .select("id,country,region,price,currency,eta,notes")
-        .eq("user_id", userId).eq("is_published", true).order("country", { nullsFirst: false }),
+        .eq("user_id", userId).order("country", { nullsFirst: false }),
       admin.from("product_images").select("product_id, url, position")
         .eq("user_id", userId).order("position", { ascending: true }),
     ]);
@@ -350,7 +350,7 @@ export const quoteStorefrontCart = createServerFn({ method: "POST" })
         .select("price, currency")
         .eq("id", data.shipping_rate_id)
         .eq("user_id", userId)
-        .eq("is_published", true)
+        
         .maybeSingle();
       const p = Number((sh as any)?.price ?? 0);
       shipping = Number.isFinite(p) && p > 0 ? p : 0;
@@ -462,7 +462,7 @@ export const createStorefrontOrder = createServerFn({ method: "POST" })
         .select("id, country, region, price, currency, eta")
         .eq("id", data.shipping_rate_id)
         .eq("user_id", userId)
-        .eq("is_published", true)
+        
         .maybeSingle();
       shippingRow = sh ?? null;
       if (!shippingRow) throw new Error("منطقة الشحن غير صحيحة.");
